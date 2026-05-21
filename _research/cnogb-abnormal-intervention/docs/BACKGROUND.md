@@ -363,12 +363,6 @@ cn-ogb-anomaly-intervention/
 
 ---
 
-## License
-
-MIT License — 詳見 [LICENSE](LICENSE) 文件。
-
----
-
 <p align="center">
   <i>本文件整合了 Gemini、Copilot GPT 及人工審閱的三方建議，作為項目所有 LLM 協作的基礎文件。</i>
 </p>

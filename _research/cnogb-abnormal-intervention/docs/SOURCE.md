@@ -1,4 +1,4 @@
-Source: https://github.com/sinwulok/atlas/blob/main/Research/cnogb-abnormal-intervation/README.md
+Source: ./BACKGROUND.md
 ImportedAt: 2026-03-12T13:54:33Z
 ImportedBy: 彪🦊先生
 Notes: imported via subtree

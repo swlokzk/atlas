@@ -1,0 +1,42 @@
+base_config: base.yaml
+
+# L1 Leave-one-out 跨標的驗證配置
+
+# 債券數據配置
+data:
+  raw_dir: data/raw
+  bonds: [cdb, adbc, exim]          # 三大政金債
+  time_column: date
+  target_column: weighted_rate
+  # 文件命名規則: {bond}_train.xlsx, {bond}_exam.xlsx
+
+# 模型配置（TranAD）
+model:
+  name: tranad
+  d_model: 128
+  nhead: 4
+  num_layers: 3
+  dim_feedforward: 256
+  dropout: 0.1
+  adversarial_weight: 1.0
+
+# 訓練配置
+training:
+  sequence_length: 16
+  batch_size: 64
+  num_epochs: 50
+  learning_rate: 0.001
+  device: cpu                        # 改為 cuda 若有 GPU
+
+# 評估配置
+evaluation:
+  mc_samples: 20                     # MC Dropout 採樣數
+  stability_seeds: [42, 123, 456, 789, 1000]
+  anomaly_threshold: 0.5             # 用於二分類的閾值
+  synthetic_validation: true
+  synthetic_types: [spike, level_shift, trend_change]
+
+# 輸出配置
+output:
+  report_path: results/l1_report.json
+  figures_dir: results/l1_figures

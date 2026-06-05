@@ -123,14 +123,14 @@ def _compute_mean_ece(loo_results: Dict[str, dict], n_bins: int = 10) -> float:
     We use train/exam pseudo-labels: exam = 1, implied normal = 0.
     Anomaly scores are used as calibrated probabilities.
     """
-    from src.evaluation.cross_domain import _compute_ece  # type: ignore[attr-defined]
+    from src.evaluation.cross_domain import compute_ece
 
     ece_values = []
     for bond_res in loo_results.values():
         scores = np.asarray(bond_res["anomaly_scores"]).ravel()
         # Exam scores are all labeled '1' for ECE computation
         labels = np.ones(len(scores), dtype=int)
-        ece_values.append(_compute_ece(scores, labels, n_bins=n_bins))
+        ece_values.append(compute_ece(scores, labels, n_bins=n_bins))
     return float(np.mean(ece_values)) if ece_values else 0.0
 
 
@@ -162,11 +162,11 @@ def _dry_run(validator: LeaveOneOutValidator) -> None:
     else:
         print("✅ All bond data loaded successfully.")
 
-    # Verify LOO logic
-    bonds = validator.BONDS
-    for test_bond in bonds:
-        train_bonds = [b for b in bonds if b != test_bond]
-        assert len(train_bonds) == 2
+    # Verify LOO logic for all bonds that have data
+    available = [b for b in validator.BONDS if validator.load_data(b) is not None]
+    for test_bond in available:
+        train_bonds = [b for b in available if b != test_bond]
+        assert len(train_bonds) >= 1, f"Need at least 1 training bond when testing {test_bond}"
         assert test_bond not in train_bonds
     print("✅ Leave-one-out logic verified.")
 

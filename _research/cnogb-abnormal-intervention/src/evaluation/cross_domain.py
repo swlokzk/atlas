@@ -21,6 +21,13 @@ from scipy import stats
 from sklearn.metrics import average_precision_score, roc_auc_score
 from sklearn.preprocessing import MinMaxScaler
 
+# Maximum number of samples used for AUROC/AUPRC evaluation to keep runtime
+# bounded when merged train + exam sets are large.
+_MAX_EVAL_SAMPLES: int = 20_000
+
+# Default random seeds used for the stability test (reproducible multi-run).
+DEFAULT_STABILITY_SEEDS: List[int] = [42, 123, 456, 789, 1000]
+
 from src.data.dataset import build_dataloaders
 from src.data.features import prepare_pair_feature_artifacts
 from src.data.loader import find_paired_files
@@ -66,8 +73,18 @@ def _compute_f1_at_threshold(
     return 2 * precision * recall / (precision + recall)
 
 
-def _compute_ece(scores: np.ndarray, labels: np.ndarray, n_bins: int = 10) -> float:
-    """Compute Expected Calibration Error (ECE)."""
+def compute_ece(scores: np.ndarray, labels: np.ndarray, n_bins: int = 10) -> float:
+    """Compute Expected Calibration Error (ECE).
+
+    Parameters
+    ----------
+    scores:
+        Predicted anomaly probabilities in [0, 1].
+    labels:
+        Binary ground-truth labels (0 = normal, 1 = anomaly).
+    n_bins:
+        Number of equal-width confidence bins.
+    """
     bins = np.linspace(0.0, 1.0, n_bins + 1)
     ece = 0.0
     n = len(scores)
@@ -79,6 +96,10 @@ def _compute_ece(scores: np.ndarray, labels: np.ndarray, n_bins: int = 10) -> fl
         avg_acc = labels[mask].mean()
         ece += mask.sum() / n * abs(avg_conf - avg_acc)
     return float(ece)
+
+
+# Keep the private alias for backward-compat internal use
+_compute_ece = compute_ece
 
 
 # ---------------------------------------------------------------------------
@@ -187,7 +208,7 @@ class LeaveOneOutValidator:
 
         eval_cfg = config.get("evaluation", {})
         self.mc_samples: int = int(eval_cfg.get("mc_samples", 20))
-        self.stability_seeds: List[int] = list(eval_cfg.get("stability_seeds", [42, 123, 456, 789, 1000]))
+        self.stability_seeds: List[int] = list(eval_cfg.get("stability_seeds", DEFAULT_STABILITY_SEEDS))
         self.anomaly_threshold: float = float(eval_cfg.get("anomaly_threshold", 0.5))
 
     # ------------------------------------------------------------------
@@ -429,9 +450,8 @@ class LeaveOneOutValidator:
             ])
 
             # Subsample for efficiency if needed
-            max_eval = 20_000
-            if len(all_scores) > max_eval:
-                idx = np.random.default_rng(seed).choice(len(all_scores), max_eval, replace=False)
+            if len(all_scores) > _MAX_EVAL_SAMPLES:
+                idx = np.random.default_rng(seed).choice(len(all_scores), _MAX_EVAL_SAMPLES, replace=False)
                 idx.sort()
                 all_scores_eval = all_scores[idx]
                 all_labels_eval = all_labels[idx]
@@ -535,4 +555,10 @@ class LeaveOneOutValidator:
         }
 
 
-__all__ = ["LeaveOneOutValidator", "compute_anomaly_consistency", "LOORoundResult"]
+__all__ = [
+    "LeaveOneOutValidator",
+    "compute_anomaly_consistency",
+    "compute_ece",
+    "LOORoundResult",
+    "DEFAULT_STABILITY_SEEDS",
+]

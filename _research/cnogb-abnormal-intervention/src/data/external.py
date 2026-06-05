@@ -31,7 +31,7 @@ def download_ak_stock_data(
         stock_code: A-share stock code (e.g. '601398' for ICBC).
         start_date: Start date in 'YYYY-MM-DD' format.
         end_date: End date in 'YYYY-MM-DD' format.
-        adjust: Price adjustment method. 'qfq' = forward-adjusted (前復權).
+    adjust: Price adjustment method. 'qfq' = forward-adjusted (前复权).
 
     Returns:
         DataFrame with columns: date, open, close, high, low, volume, amount, turnover_rate.
@@ -83,6 +83,11 @@ def download_ak_stock_data(
         # Attempt positional rename for unexpected column layouts
         expected = ["date", "open", "close", "high", "low", "volume", "amount", "turnover_rate"]
         if len(df.columns) >= len(expected):
+            logger.warning(
+                "Unrecognised AKShare columns %s; applying positional rename to %s.",
+                df.columns.tolist(),
+                expected[: len(df.columns)],
+            )
             df.columns = expected[: len(df.columns)]
         else:
             raise ValueError(f"Cannot parse columns from AKShare response: {df.columns.tolist()}")

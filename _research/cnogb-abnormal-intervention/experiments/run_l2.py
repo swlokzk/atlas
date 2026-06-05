@@ -172,8 +172,12 @@ def _reconstruction_anomaly_scores(series: np.ndarray, window: int = 16) -> np.n
         scores[i] = (series[i] - mean_val) ** 2
     # Normalise to [0, 1]
     max_score = scores.max()
-    if max_score > 0:
-        scores = scores / max_score
+    if max_score == 0:
+        raise ValueError(
+            "All anomaly scores are zero — the input series may be constant. "
+            "Check that the input data contains meaningful variation."
+        )
+    scores = scores / max_score
     return scores
 
 
@@ -256,8 +260,12 @@ def compute_anomaly_scores(
                 scores[i] = err
 
         max_s = scores.max()
-        if max_s > 0:
-            scores = scores / max_s
+        if max_s == 0:
+            raise ValueError(
+                "TranAD anomaly scores are all zero — the input series may be constant. "
+                "Check that the input data contains meaningful variation."
+            )
+        scores = scores / max_s
         return scores
 
     except Exception as exc:

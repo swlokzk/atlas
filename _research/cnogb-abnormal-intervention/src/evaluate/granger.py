@@ -58,10 +58,14 @@ def granger_causality_test(
 
     if len(X) != len(Y):
         raise ValueError(f"X and Y must have the same length. Got {len(X)} vs {len(Y)}.")
-    if len(X) < max_lag * 3:
+    # A VAR(p) model consumes p observations plus needs degrees of freedom for
+    # both the restricted and unrestricted regressions; max_lag * 10 is a
+    # conservative lower bound that ensures the F-test has meaningful power.
+    min_samples = max_lag * 10
+    if len(X) < min_samples:
         raise ValueError(
             f"Not enough samples ({len(X)}) for max_lag={max_lag}. "
-            f"Need at least {max_lag * 3} samples."
+            f"Need at least {min_samples} samples."
         )
 
     # grangercausalitytests expects data as [[Y, X]] (Y first)
@@ -233,10 +237,13 @@ def compute_lag_correlations(
 
     for lag in lags:
         if lag < 0:
-            # X leads Y
-            corr = float(np.corrcoef(X[:lag], Y[-lag:])[0, 1])
+            # Negative lag: X leads Y by abs(lag) periods.
+            # X[:-abs(lag)] aligns with Y[abs(lag):] (future Y values).
+            abs_lag = abs(lag)
+            corr = float(np.corrcoef(X[:-abs_lag], Y[abs_lag:])[0, 1])
         elif lag > 0:
-            # Y leads X
+            # Positive lag: Y leads X by lag periods.
+            # X[lag:] aligns with Y[:-lag] (past Y values).
             corr = float(np.corrcoef(X[lag:], Y[:-lag])[0, 1])
         else:
             corr = float(np.corrcoef(X, Y)[0, 1])

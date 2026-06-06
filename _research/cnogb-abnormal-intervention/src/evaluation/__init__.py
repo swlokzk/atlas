@@ -1,3 +1,5 @@
-"""Compatibility package mirroring src.evaluate."""
+"""Evaluation utilities for cross-domain validation."""
 
-from src.evaluate import *  # noqa: F401,F403
+from .cross_domain import LeaveOneOutValidator, compute_anomaly_consistency, compute_ece
+
+__all__ = ["LeaveOneOutValidator", "compute_anomaly_consistency", "compute_ece"]

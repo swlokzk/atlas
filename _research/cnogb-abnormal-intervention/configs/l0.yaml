@@ -1,0 +1,49 @@
+base_config: base.yaml
+
+model:
+  name: tranad
+  d_model: 128
+  nhead: 4
+  num_layers: 3
+  dim_feedforward: 256
+  dropout: 0.1
+  adversarial_weight: 0.5
+  reconstruction_weight: 1.0
+  discriminator_hidden: 64
+
+data:
+  raw_dir: data/raw
+  pair_name: null
+  time_column: date
+  target_column: weighted_rate
+  derived_feature_columns: []
+  categorical_columns: []
+
+training:
+  sequence_length: 16
+  batch_size: 64
+  num_epochs: 20
+  learning_rate: 0.001
+  discriminator_learning_rate: 0.001
+  negative_noise_scale: 0.05
+  device: cpu
+
+evaluation:
+  anomaly_threshold: null
+  threshold_quantile: 0.95
+  synthetic_validation: true
+  synthetic_anomaly_ratio: 0.1
+  synthetic_types:
+    - spike
+    - level_shift
+    - trend_change
+  mc_samples: 20
+  stability_seeds:
+    - 42
+    - 43
+    - 44
+
+output:
+  report_path: results/l0_report.json
+  figures_dir: results/l0_figures
+  model_path: results/l0_model.pt

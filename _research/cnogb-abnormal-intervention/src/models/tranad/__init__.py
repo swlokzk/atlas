@@ -1,5 +1,14 @@
-"""TranAD scaffolding package."""
+"""TranAD components used by L0 anomaly detection experiments."""
 
-from .model import TranADConfig, build_tranad
+from .discriminator import Discriminator, TransformerDiscriminator
+from .loss import TranADLoss
+from .model import TranAD, TranADConfig, build_tranad
 
-__all__ = ["TranADConfig", "build_tranad"]
+__all__ = [
+	"Discriminator",
+	"TransformerDiscriminator",
+	"TranAD",
+	"TranADConfig",
+	"TranADLoss",
+	"build_tranad",
+]

@@ -1,0 +1,74 @@
+# L2 cross-asset analysis configuration
+# Phase 3: A-share Bank vs CDB bond Granger Causality
+
+base_config: base.yaml
+
+# ── Data ──────────────────────────────────────────────────────────────────────
+data:
+  # Bond pair (must match a file pair in paths.raw)
+  pair_name: cdb
+  time_column: date
+  target_column: weighted_rate
+
+  # A-share bank sector tickers (AKShare codes)
+  stock:
+    tickers:
+      - code: "601398"
+        name: "工商银行"
+      - code: "601288"
+        name: "农业银行"
+      - code: "601988"
+        name: "中国银行"
+      - code: "601939"
+        name: "建设银行"
+      - code: "600036"
+        name: "招商银行"
+    start_date: "2020-01-01"
+    end_date: "2024-01-01"
+    price_column: close   # column used as the representative price series
+
+  # Data alignment options
+  alignment:
+    method: inner         # keep only dates present in both bond and stock data
+    frequency: daily
+
+# ── Model ─────────────────────────────────────────────────────────────────────
+model:
+  name: tranad
+  d_model: 128
+  nhead: 4
+  num_layers: 3
+  dim_feedforward: 256
+  dropout: 0.1
+  adversarial_weight: 1.0
+
+# ── Training ──────────────────────────────────────────────────────────────────
+training:
+  sequence_length: 16
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 50
+  device: cpu
+
+# ── Evaluation ────────────────────────────────────────────────────────────────
+evaluation:
+  mc_dropout_samples: 20
+  anomaly_threshold: 0.5
+  stability_seeds:
+    - 42
+    - 123
+    - 456
+    - 789
+    - 1000
+
+# ── Granger Causality ─────────────────────────────────────────────────────────
+granger:
+  max_lag: 5
+  alpha: 0.05           # significance level
+  dynamic_window_size: 30
+  dynamic_stride: 5
+
+# ── Output ────────────────────────────────────────────────────────────────────
+output:
+  report_path: results/l2_report.json
+  figures_dir: results/l2_figures

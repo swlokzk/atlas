@@ -1,0 +1,34 @@
+name: Deploy r3f-portfolio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_development/r3f-portfolio/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build
+        working-directory: _development/r3f-portfolio
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=r3f-portfolio
+          workingDirectory: _development/r3f-portfolio

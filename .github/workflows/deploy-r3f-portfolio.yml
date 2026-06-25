@@ -6,34 +6,38 @@ on:
     paths:
       - '_development/r3f-portfolio/**'
 
+permissions:
+  contents: read
+  deployments: write
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+          cache: 'npm'        # optional: cache for npm; we will also cache pnpm store below
 
       - name: Cache pnpm store
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('_development/r3f-portfolio/**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Install (workspace)
-        run: pnpm install --frozen-lockfile
+      - name: Install pnpm and dependencies
+        working-directory: _development/r3f-portfolio
+        run: |
+          npm install -g pnpm@8
+          pnpm install --frozen-lockfile
 
       - name: Build r3f
         working-directory: _development/r3f-portfolio

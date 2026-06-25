@@ -198,3 +198,31 @@ Contributions are welcome. Please follow the repository governance guidelines an
 
 各專案的授權資訊請參閱個別專案文件。  
 See individual projects for specific licensing information.
+<!-- START_PROJECT_OVERVIEW -->
+
+## 專案總覽 | Project Overview
+
+| Path | 類型 | 簡介 |
+| --- | --- | --- |
+| `.github` |  |  |
+| `.vscode` |  |  |
+| `_development` |  |  |
+| `_research` |  |  |
+| `catalog` |  |  |
+| `devnotes` |  |  |
+| `docs` |  |  |
+
+## Repository Structure
+
+```text
+.
+├── .github/
+├── .vscode/
+├── _development/
+├── _research/
+├── catalog/
+├── devnotes/
+└── docs/
+```
+
+<!-- END_PROJECT_OVERVIEW -->

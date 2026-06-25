@@ -1,4 +1,4 @@
-# workspace-atlas
+# atlas
 
 ## 概述 | Overview
 
@@ -10,7 +10,7 @@ This repository is a curated project ecosystem index currently organized around 
 ## 專案結構 | Repository Structure
 
 ```text
-workspace-atlas/
+atlas/
 ├── _research/             # 研究型專案 | Research projects
 ├── _development/          # 開發型專案 | Development projects
 ├── catalog/               # 專案索引與 metadata | Project index and metadata
@@ -66,8 +66,8 @@ Development projects including frontend applications, trading signal detection, 
 1. 只 clone 並 sparse-checkout 單一資料夾：
 
 ```bash
-git clone --filter=blob:none --sparse https://github.com/sinwulok/workspace-atlas.git
-cd workspace-atlas
+git clone --filter=blob:none --sparse https://github.com/sinwulok/atlas.git
+cd atlas
 git sparse-checkout set _research/cnogb-abnormal-intervention
 ```
 
@@ -146,8 +146,8 @@ Best for users who need git functionality but only want specific folders.
 ```bash
 # 以最小 blob 模式 clone 並啟用 sparse 模式
 # Clone with minimal blobs and enable sparse mode
-git clone --filter=blob:none --sparse https://github.com/sinwulok/workspace-atlas.git
-cd workspace-atlas
+git clone --filter=blob:none --sparse https://github.com/sinwulok/atlas.git
+cd atlas
 
 # 只取得所需資料夾（範例）
 # Fetch only the folder you need (example)
@@ -164,7 +164,7 @@ git checkout <branch>
 Suitable for public GitHub repos, returns a plain folder without .git.
 
 ```bash
-svn export https://github.com/sinwulok/workspace-atlas/trunk/_research/cnogb-abnormal-intervention
+svn export https://github.com/sinwulok/atlas/trunk/_research/cnogb-abnormal-intervention
 ```
 
 ### 方法三：下載 ZIP 並解壓縮 | Method 3: Download ZIP and extract specific folder
@@ -173,15 +173,15 @@ svn export https://github.com/sinwulok/workspace-atlas/trunk/_research/cnogb-abn
 Download a snapshot of the entire repository (larger), then extract only the needed folder.
 
 ```bash
-curl -L -o repo.zip https://github.com/sinwulok/workspace-atlas/archive/refs/heads/main.zip
-unzip repo.zip "workspace-atlas-main/_research/cnogb-abnormal-intervention/*" -d extracted
+curl -L -o repo.zip https://github.com/sinwulok/atlas/archive/refs/heads/main.zip
+unzip repo.zip "atlas-main/_research/cnogb-abnormal-intervention/*" -d extracted
 ```
 
 ### 方法四：GitHub CLI | Method 4: GitHub CLI
 
 ```bash
-gh repo clone sinwulok/workspace-atlas -- --filter=blob:none --sparse
-cd workspace-atlas
+gh repo clone sinwulok/atlas -- --filter=blob:none --sparse
+cd atlas
 git sparse-checkout set _research/cnogb-abnormal-intervention
 ```
 

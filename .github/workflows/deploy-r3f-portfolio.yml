@@ -6,6 +6,9 @@ on:
     paths:
       - '_development/r3f-portfolio/**'
 
+  # 允許在 GitHub 網頁介面上手動「立刻觸發」
+  workflow_dispatch:
+
 permissions:
   contents: read
   deployments: write

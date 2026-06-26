@@ -23,8 +23,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'        # optional: cache for npm; we will also cache pnpm store below
-
+          cache: 'pnpm'
+          cache-dependency-path: _development/r3f-portfolio/pnpm-lock.yaml
+      
       - name: Cache pnpm store
         uses: actions/cache@v4
         with:

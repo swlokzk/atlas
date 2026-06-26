@@ -47,11 +47,11 @@ jobs:
         working-directory: _development/r3f-portfolio
         run: pnpm run build
 
-      # 部署至 Cloudflare
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      # 使用官方統一的 Wrangler Action
+      - name: Deploy to Cloudflare Pages via Wrangler Action
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: r3f-portfolio
-          directory: _development/r3f-portfolio/dist
+          # 核心差異：直接呼叫 Wrangler 原生的 pages deploy 命令
+          command: pages deploy _development/r3f-portfolio/dist --project-name=r3f-portfolio

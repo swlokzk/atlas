@@ -16,29 +16,23 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+        # 預設為 fetch-depth: 1 (Shallow Clone)，節省拉取資源
 
-      - name: Use Node.js 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Use Node.js 20 with pnpm cache
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
           cache-dependency-path: _development/r3f-portfolio/pnpm-lock.yaml
       
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('_development/r3f-portfolio/**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      - name: Install pnpm and dependencies
+      - name: Install dependencies
         working-directory: _development/r3f-portfolio
-        run: |
-          npm install -g pnpm@8
-          pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build r3f
         working-directory: _development/r3f-portfolio
@@ -50,4 +44,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: r3f-portfolio
+          # 指向 GitHub 運行器上已經打包好的 dist 目錄
           directory: _development/r3f-portfolio/dist

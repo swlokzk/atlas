@@ -38,11 +38,11 @@ jobs:
         working-directory: _development/r3f-portfolio
         run: pnpm run build
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: r3f-portfolio
-          # 指向 GitHub 運行器上已經打包好的 dist 目錄
-          directory: _development/r3f-portfolio/dist
+      - name: Deploy via Wrangler CLI
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler pages deploy _development/r3f-portfolio/dist \
+            --project-name=r3f-portfolio \
+            --branch=main

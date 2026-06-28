@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     paths:
       - '_development/r3f-portfolio/**'
-  workflow_dispatch: # 順便保留手動觸發功能，方便測試
+  workflow_dispatch: # 保留手動觸發功能，方便測試
 
 permissions:
   contents: read
@@ -18,15 +18,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 使用 GitHub 官方允許的 setup-node
-      - name: Use Node.js 20
+      # 1. 升級至 Node.js 24 避免 Actions 環境棄用警告
+      - name: Use Node.js 24
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
-      # 替代方案：直接用 npm 全局安裝 pnpm，不走第三方的 action
+      # 2. 核心修正：升級至 pnpm@9 以匹配你本地生成的 lockfile 結構
       - name: Install pnpm
-        run: npm install -g pnpm@8
+        run: npm install -g pnpm@9
 
       # 使用 GitHub 官方允許的 actions/cache 手動處理快取
       - name: Cache pnpm store
@@ -37,7 +37,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      # 執行安裝
+      # 執行安裝（現在有了 package.json 中的 onlyBuiltDependencies，sharp 也能在雲端安全順利編譯）
       - name: Install dependencies
         working-directory: _development/r3f-portfolio
         run: pnpm install --frozen-lockfile
@@ -47,11 +47,10 @@ jobs:
         working-directory: _development/r3f-portfolio
         run: pnpm run build
 
-      # 使用官方統一的 Wrangler Action
+      # 使用官方統一的 Wrangler Action 部署至 Cloudflare
       - name: Deploy to Cloudflare Pages via Wrangler Action
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # 核心差異：直接呼叫 Wrangler 原生的 pages deploy 命令
           command: pages deploy _development/r3f-portfolio/dist --project-name=r3f-portfolio

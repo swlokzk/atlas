@@ -28,6 +28,7 @@
     "react-parallax-tilt": "^1.7.320",
     "react-router-dom": "^6.30.3",
     "react-type-animation": "^3.2.0",
+    "react-use-measure": "^2.1.7",
     "react-vertical-timeline-component": "^4.0.0",
     "three": "^0.183.2"
   },

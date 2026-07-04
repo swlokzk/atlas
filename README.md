@@ -193,3 +193,31 @@ git sparse-checkout set _research/cnogb-abnormal-intervention
 Contributions are welcome. Please follow the repository governance guidelines and naming conventions when submitting changes.
 
 <!-- END_PROJECT_OVERVIEW -->
+<!-- START_PROJECT_OVERVIEW -->
+
+## 專案總覽 | Project Overview
+
+| Path | 類型 | 簡介 |
+| --- | --- | --- |
+| `.github` |  |  |
+| `.vscode` |  |  |
+| `_development` |  |  |
+| `_research` |  |  |
+| `catalog` |  |  |
+| `devnotes` |  |  |
+| `docs` |  |  |
+
+## Repository Structure
+
+```text
+.
+├── .github/
+├── .vscode/
+├── _development/
+├── _research/
+├── catalog/
+├── devnotes/
+└── docs/
+```
+
+<!-- END_PROJECT_OVERVIEW -->

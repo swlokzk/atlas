@@ -5,3 +5,5 @@ outputs/
 *.egg-info/
 .DS_Store
 *.log
+
+*.ipynb

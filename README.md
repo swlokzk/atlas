@@ -91,3 +91,31 @@ Follow [CONTRIBUTING.md](CONTRIBUTING.md) and keep changes scoped to the target 
 
 - The previous repository overview is archived as `README_ARC_V2`.
 - Some metadata files may still contain historical aliases and can be normalized in a follow-up pass.
+<!-- START_PROJECT_OVERVIEW -->
+
+## 專案總覽 | Project Overview
+
+| Path | 類型 | 簡介 |
+| --- | --- | --- |
+| `.github` |  |  |
+| `.vscode` |  |  |
+| `_development` |  |  |
+| `_research` |  |  |
+| `catalog` |  |  |
+| `devnotes` |  |  |
+| `docs` |  |  |
+
+## Repository Structure
+
+```text
+.
+├── .github/
+├── .vscode/
+├── _development/
+├── _research/
+├── catalog/
+├── devnotes/
+└── docs/
+```
+
+<!-- END_PROJECT_OVERVIEW -->

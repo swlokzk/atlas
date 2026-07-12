@@ -1,0 +1,47 @@
+{
+  "status": "blocked_missing_checkpoint",
+  "model_name": "gated_fusion_former",
+  "model_version": "gff-v3",
+  "canonical_class": "src.models.model.GatedFusionFormer",
+  "checkpoint_path": null,
+  "checkpoint_sha256": null,
+  "git_commit": "3ff77f0",
+  "model_config": "deploy/config/model_config.json",
+  "label_ordering": [
+    "8PSK",
+    "BPSK",
+    "CPFSK",
+    "GFSK",
+    "PAM4",
+    "QAM16",
+    "QAM64",
+    "QPSK",
+    "AM-DSB",
+    "AM-SSB",
+    "WBFM"
+  ],
+  "preprocessing_version": "unverified-training-contract",
+  "export_date": null,
+  "supported_runtime": [
+    "pytorch"
+  ],
+  "expected_tensor_shapes": {
+    "iq": [
+      "B",
+      2,
+      128
+    ],
+    "stft": [
+      "B",
+      1,
+      32,
+      128
+    ],
+    "std": [
+      "B",
+      2,
+      128
+    ]
+  },
+  "diagnostic": "No checkpoint was present in the repository audit. Populate this manifest only after a supplied checkpoint is loaded strictly by src.models.model.GatedFusionFormer."
+}

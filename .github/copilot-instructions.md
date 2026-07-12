@@ -1,0 +1,8 @@
+# GitHub Copilot Workspace Instructions
+
+## 🔒 Strict Security & Package Governance (Supply-Chain Protection)
+- **Official Registries Only:** You are STRICTLY FORBIDDEN from specifying or installing packages outside of the official PyPI registry. Never pull or suggest packages directly from untrusted URLs, unverified Git repositories (`pip install git+https://...`), or obscure external `.whl` files.
+- **Strictly Whitelisted Mainstream Libraries:** You may ONLY utilize industry-standard, verified, and enterprise-grade core libraries required for this project: `torch`, `onnx`, `onnxruntime`, `scipy`, `numpy`, `fastapi`, `pydantic`, `huggingface_hub`, `python-dotenv`, `uvicorn`.
+- **Zero-Trust Command Execution:** Do NOT autonomously execute environment setup, `pip install`, or `conda run` commands inside the terminal. You must write out the complete package configuration into `deploy/requirements.txt` first, present it clearly to the user, and wait for explicit user confirmation.
+- **No Code Decoration via Obscure Packages:** If you need a helper utility (e.g., for padding, string parsing, or logging), you must write it natively using standard Python built-in libraries. Do NOT introduce minor, unverified third-party libraries to solve trivial problems.
+- **Environment Context Awareness:** Real model weights (`.pth`) and confidential API tokens are stored in the local `.env` file or cloud registry. Always prioritize using `os.getenv` or `python-dotenv` to safely query backend credentials.

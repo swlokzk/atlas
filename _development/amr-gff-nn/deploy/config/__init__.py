@@ -1,0 +1,1 @@
+"""Versioned deployment configuration resources."""

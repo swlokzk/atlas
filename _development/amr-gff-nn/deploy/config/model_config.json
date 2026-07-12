@@ -1,0 +1,31 @@
+{
+  "model_name": "gated_fusion_former",
+  "model_version": "gff-v3",
+  "canonical_class": "src.models.model.GatedFusionFormer",
+  "embed_dim": 96,
+  "num_classes": 11,
+  "signal_length": 128,
+  "stft_time_steps": 128,
+  "stft_frequency_bins": 32,
+  "depth": 4,
+  "num_heads": 4,
+  "labels": [
+    "8PSK",
+    "BPSK",
+    "CPFSK",
+    "GFSK",
+    "PAM4",
+    "QAM16",
+    "QAM64",
+    "QPSK",
+    "AM-DSB",
+    "AM-SSB",
+    "WBFM"
+  ],
+  "gating_weight_order": [
+    "iq",
+    "stft",
+    "std"
+  ],
+  "checkpoint_compatibility": "pending"
+}

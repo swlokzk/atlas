@@ -1,0 +1,26 @@
+# ============================================================================
+# AMR-GFFNN Production Runtime Dependencies (CPython 3.10.x Strict)
+# ============================================================================
+#
+# Direct dependencies are limited to the workspace-approved packages below.
+# Install from official PyPI only after explicit approval:
+#   python -m pip install -r deploy/requirements.txt
+--index-url https://pypi.org/simple
+
+# Core Machine Learning Runtime
+torch==2.3.1
+numpy==1.24.3
+scipy==1.11.2
+
+# ONNX Compilation & Inference Engine (OpSet 17/18 Compatible)
+onnx==1.16.1
+onnxruntime==1.18.1
+
+# Model Asset Registry Governance
+huggingface-hub==0.23.4
+python-dotenv==1.0.1
+
+# High-Performance API Gateway
+fastapi==0.111.0
+pydantic==2.7.4
+uvicorn==0.30.1

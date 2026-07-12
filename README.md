@@ -102,7 +102,6 @@ Follow [CONTRIBUTING.md](CONTRIBUTING.md) and keep changes scoped to the target 
 | `_development` |  |  |
 | `_research` |  |  |
 | `catalog` |  |  |
-| `devnotes` |  |  |
 | `docs` |  |  |
 
 ## Repository Structure
@@ -114,7 +113,6 @@ Follow [CONTRIBUTING.md](CONTRIBUTING.md) and keep changes scoped to the target 
 ├── _development/
 ├── _research/
 ├── catalog/
-├── devnotes/
 └── docs/
 ```
 

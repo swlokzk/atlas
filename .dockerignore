@@ -1,0 +1,12 @@
+.git/
+.env
+.env.*
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+_development/**/outputs/
+_development/**/results/
+_development/**/runs/
+_development/**/tests/
+_development/**/assets/

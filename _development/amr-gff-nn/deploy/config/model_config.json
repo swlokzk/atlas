@@ -27,5 +27,7 @@
     "stft",
     "std"
   ],
-  "checkpoint_compatibility": "pending"
+  "checkpoint_filename": "gatedfusionformer_v4.0_best_20251025_211831.pth",
+  "checkpoint_sha256": "9523ff1097725bd8b15ea1f53e7d0de154eb719ce27412189865abd0325fdc9d",
+  "checkpoint_compatibility": "strict_load_passed"
 }

@@ -1,0 +1,51 @@
+{
+  "artifact_name": "gatedfusionformer_v4.0_best_20251025_211831.pth",
+  "artifact_type": "pytorch_checkpoint",
+  "model_name": "gated_fusion_former",
+  "model_version": "gff-v3",
+  "canonical_class": "src.models.model.GatedFusionFormer",
+  "checkpoint_repository": "swlok/amr-gffnn",
+  "checkpoint_filename": "gatedfusionformer_v4.0_best_20251025_211831.pth",
+  "checkpoint_format": "raw_state_dict",
+  "sha256": "9523ff1097725bd8b15ea1f53e7d0de154eb719ce27412189865abd0325fdc9d",
+  "git_commit": "f62f62f77c77064623148fa912ee24dd08993bb1",
+  "validated_date": "2026-07-12",
+  "preprocessing_version": "amr-preprocessing-v1",
+  "labels": [
+    "8PSK",
+    "BPSK",
+    "CPFSK",
+    "GFSK",
+    "PAM4",
+    "QAM16",
+    "QAM64",
+    "QPSK",
+    "AM-DSB",
+    "AM-SSB",
+    "WBFM"
+  ],
+  "model_configuration": {
+    "embed_dim": 96,
+    "num_classes": 11,
+    "signal_length": 128,
+    "stft_frequency_bins": 32,
+    "stft_time_steps": 128,
+    "depth": 4,
+    "num_heads": 4
+  },
+  "expected_tensor_shapes": {
+    "iq": ["batch", 2, 128],
+    "stft": ["batch", 1, 32, 128],
+    "std": ["batch", 2, 128],
+    "logits": ["batch", 11],
+    "gating_weights": ["batch", 3]
+  },
+  "gating_weight_order": ["iq", "stft", "std"],
+  "supported_runtime": {
+    "python": "3.10.x",
+    "pytorch": "2.3.1",
+    "onnxruntime": "1.18.1"
+  },
+  "quantization_state": "pytorch_fp32_source",
+  "compatibility_result": "strict_load_passed"
+}

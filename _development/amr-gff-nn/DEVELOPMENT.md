@@ -117,7 +117,7 @@ _development/amr-gff-nn/
 │       └── Dockerfile             # CPU deployment image
 │
 ├── artifacts/
-│   └── gff-v3/                    # Generated deployment artifacts
+│   └── gff-ver/                    # Generated deployment artifacts
 │
 ├── tests/                         # Standard-library unittest suite
 ├── assets/                        # Research plots and visualizations
@@ -409,7 +409,7 @@ python -m deploy.export_onnx
 Generated artifact:
 
 ```text
-artifacts/gff-v3/model.fp32.onnx
+artifacts/gff-ver/model.fp32.onnx
 ```
 
 The export uses ONNX opset 17, dynamic batch size, and fixed modality dimensions.
@@ -423,7 +423,7 @@ python -m deploy.validate_onnx
 Generated report:
 
 ```text
-artifacts/gff-v3/parity_report.json
+artifacts/gff-ver/parity_report.json
 ```
 
 Quantization is blocked unless the FP32 parity gate passes.
@@ -437,7 +437,7 @@ python -m deploy.quantize_onnx
 Generated artifact:
 
 ```text
-artifacts/gff-v3/model.int8.onnx
+artifacts/gff-ver/model.int8.onnx
 ```
 
 Dynamic INT8 has been structurally generated and loaded successfully. Accuracy approval on real RadioML data remains pending.
@@ -518,7 +518,7 @@ Representative response:
   "preprocessing_latency_ms": 0.8,
   "inference_latency_ms": 2.1,
   "total_latency_ms": 3.2,
-  "model_version": "gff-v3-int8"
+  "model_version": "gff-ver-int8"
 }
 ```
 

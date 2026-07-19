@@ -39,7 +39,7 @@ uvicorn deploy.service.app:app --host 0.0.0.0 --port 8000
 The repository currently uses:
 
 ```text
-artifacts/gff-v3/
+artifacts/gff-ver/
 ```
 
 Typical files include `model.fp32.onnx`, `model.int8.onnx`, configuration, preprocessing, checkpoint, and parity manifests. The artifact directory is existing deployment evidence; it is not a claim that a regenerated `gff-v5` artifact bundle has been produced.

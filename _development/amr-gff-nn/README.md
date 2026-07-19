@@ -84,7 +84,7 @@ _development/amr-gff-nn/
 │       └── Dockerfile             # CPU deployment image
 │
 ├── artifacts/
-│   └── gff-v3/                    # Generated deployment artifacts
+│   └── gff-ver/                   # Generated deployment artifacts
 │
 ├── tests/                         # Standard-library unittest suite
 ├── assets/                        # Research plots and visualizations

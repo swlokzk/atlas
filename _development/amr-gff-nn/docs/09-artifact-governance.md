@@ -22,10 +22,10 @@ Every artifact bundle should be traceable to:
 The existing repository bundle is:
 
 ```text
-artifacts/gff-v3/
+artifacts/gff-ver/
 ```
 
-The deployment identity in configuration is `gffnn` / `gff-v5`. A future regenerated bundle should use an explicitly chosen layout and manifest rather than silently overwriting the existing v3 artifact directory.
+The deployment identity in configuration is `gffnn` / `gff-v5`. A future regenerated bundle should use an explicitly chosen layout and manifest rather than silently overwriting the existing `gff-ver` artifact directory.
 
 A target layout is:
 

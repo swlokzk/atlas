@@ -27,4 +27,4 @@ This directory contains detailed project documentation for the AMR-GFFNN deploym
 
 `gffnn` is the main model name and `gff-v5` is the current deployment identity in configuration and planning documents.
 
-The repository still contains generated artifacts under `artifacts/gff-v3/`. That directory name identifies the existing artifact bundle and must not be interpreted as proof that a new `gff-v5` artifact bundle has been exported.
+The repository still contains generated artifacts under `artifacts/gff-ver/`. That directory name identifies the existing artifact bundle and must not be interpreted as proof that a new `gff-v5` artifact bundle has been exported.

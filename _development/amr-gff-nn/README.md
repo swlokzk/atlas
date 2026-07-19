@@ -5,6 +5,21 @@ A multimodal Gated Fusion Former neural network for automatic modulation recogni
 
 ---
 
+## 快速導覽手冊 | Engineering Documentation
+
+本專案區分「研究分析」與「生產部署」兩大管線。具體的環境建置、執行指令與部署契約，請參閱以下獨立文件：  
+This project isolates the research analysis and production deployment pipelines. For detailed environment setup, execution commands, and deployment contracts, please refer to the following independent documents:
+
+*   🛠️ **[DEVELOPMENT.md](./DEVELOPMENT.md)**：完整工程操作手冊
+*   Comprehensive Engineering Manual
+    - Python 3.10 環境建置與依賴管理 | Python 3.10 environment setup and dependency management
+    - 研究實驗 CLI 指令（消融實驗、Gating 權重分析、架構對比）| Research experiment CLI commands (ablation studies, gating-weight analysis, and architecture comparison)
+    - Deployment Pipeline（ONNX 導出、精度驗證、INT8 量化流程）| Deployment pipeline (ONNX export, parity validation, and INT8 quantization workflows)
+    - FastAPI 服務啟動與 Docker 容器化部署 | FastAPI service startup and CPU Docker container deployment
+*   📝 **[deploy/IMPLEMENTATION_NOTES.md](./deploy/IMPLEMENTATION_NOTES.md)**：部署實作細節與底層設計筆記 | Deployment implementation notes and low-level design records.
+
+---
+
 ## 概述 | Overview
 
 AMR-GFFNN 是一個基於 PyTorch 的自動調變識別模型，使用三種訊號模態：
@@ -78,19 +93,6 @@ _development/amr-gff-nn/
 ```
 
 `artifacts/` contains generated model files and reports. Binary deployment artifacts should remain excluded from Git unless repository policy explicitly allows them.
-
----
-
-## 快速導覽手冊 | Engineering Documentation
-
-本專案區分「研究分析」與「生產部署」兩大管線。具體的環境建置、執行指令與部署契約，請參閱以下獨立文件：
-
-*   🛠️ **[DEVELOPMENT.md](./DEVELOPMENT.md)**：完整工程操作手冊。包含：
-    - Python 3.10 環境建置與依賴管理
-    - 研究實驗 CLI 指令（消融實驗、Gating 權重分析、架構對比）
-    - Deployment Pipeline（ONNX 導出、精度驗證、INT8 量化流程）
-    - FastAPI 服務啟動與 Docker 容器化部署
-*   📝 **[deploy/IMPLEMENTATION_NOTES.md](./deploy/IMPLEMENTATION_NOTES.md)**：部署實作細節與底層設計筆記。
 
 ---
 

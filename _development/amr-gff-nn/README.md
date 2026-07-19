@@ -94,20 +94,15 @@ _development/amr-gff-nn/
 
 ---
 
-
----
-
 ## 輸出與展示 | Outputs and Research Artifacts
 
 **資料集 | Dataset**：本專案使用 [RadioML 2016.10a (RML2016.10a)](https://www.deepsig.ai/datasets)。下載並解壓縮後，以 `RML2016.10a_dict.pkl` 作為 `--data` 參數。  
 This project uses [RadioML 2016.10a (RML2016.10a)](https://www.deepsig.ai/datasets). After downloading and extracting, use `RML2016.10a_dict.pkl` as the `--data` parameter.
 
----
-
-## 輸出與展示 | Outputs and Demos
-
-所有圖表、視覺化結果、CSV 與 logs 儲存於 `--output-dir` 指定目錄（預設 `outputs/`）。  
+**紀錄 | LOGS**: 所有圖表、視覺化結果、CSV 與 logs 儲存於 `--output-dir` 指定目錄（預設 `outputs/`）。  
 All charts, visualizations, CSVs, and logs are saved in the directory specified by `--output-dir` (default `outputs/`).
+
+---
 
 ### 基本模型評估 | Basic Model Evaluation (`evaluate.py`)
 

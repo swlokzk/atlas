@@ -7,16 +7,23 @@ A multimodal Gated Fusion Former neural network for automatic modulation recogni
 
 ## 快速導覽手冊 | Engineering Documentation
 
-本專案區分「研究分析」與「生產部署」兩大管線。具體的環境建置、執行指令與部署契約，請參閱以下獨立文件：  
-This project isolates the research analysis and production deployment pipelines. For detailed environment setup, execution commands, and deployment contracts, please refer to the following independent documents:
+本專案區分「研究分析」與「生產部署」兩大管線。具體的環境建置、執行指令、演算法契約與詳細的文件目錄，請參閱以下核心指南：
 
-*   🛠️ **[DEVELOPMENT.md](./DEVELOPMENT.md)**：完整工程操作手冊
-*   Comprehensive Engineering Manual
-    - Python 3.10 環境建置與依賴管理 | Python 3.10 environment setup and dependency management
-    - 研究實驗 CLI 指令（消融實驗、Gating 權重分析、架構對比）| Research experiment CLI commands (ablation studies, gating-weight analysis, and architecture comparison)
-    - Deployment Pipeline（ONNX 導出、精度驗證、INT8 量化流程）| Deployment pipeline (ONNX export, parity validation, and INT8 quantization workflows)
-    - FastAPI 服務啟動與 Docker 容器化部署 | FastAPI service startup and CPU Docker container deployment
-*   📝 **[deploy/IMPLEMENTATION_NOTES.md](./deploy/IMPLEMENTATION_NOTES.md)**：部署實作細節與底層設計筆記 | Deployment implementation notes and low-level design records.
+This project isolates the research analysis and production deployment pipelines. For detailed environment setup, execution commands, algorithmic contracts, and the complete documentation index, please refer to the following core guides:
+
+* 🛠️ **[DEVELOPMENT.md](DEVELOPMENT.md)**：基礎工程環境配置手冊 | Foundation Engineering Manual
+* Python 3.10 環境建置、最小化依賴安裝與自動化單元測試基線。
+* Python 3.10 environment initialization, minimal dependency configuration, and automated unittest baselines.
+
+
+* 📖 **[docs/README.md](./docs/README.md)**：技術文件總索引與唯一事實來源 | Technical Documentation Index & Source of Truth
+* **`/docs` 目錄的全局入口**。內含項目定位（01）、研究工作流（02）、標準模型（03）、前處理契約（04）、CPU 部署（05）、多後端（06）、FastAPI 服務（07）、驗證矩陣（08）與資產治理（09）共 10 份原子化說明，並明確隔離 `gff-v3` 既有資產與 `gff-v5` 目標部署配置。
+* **The central gateway to the `/docs` directory**. It encapsulates 10 atomic documents spanning overview (01), research workflows (02), canonical models (03), preprocessing contracts (04), CPU reference flows (05), runtime backends (06), FastAPI services (07), validation matrices (08), and artifact governance (09), strictly decoupling legacy `gff-v3` assets from target `gff-v5` deployment identities.
+
+
+* 📝 **[deploy/IMPLEMENTATION_NOTES.md](./deploy/IMPLEMENTATION_NOTES.md)**：部署實作細節與底層設計筆記 | Deployment Implementation Notes & Low-Level Design Records
+* 生產環境架構優化、記憶體配置策略與 MLOps 管線的底層設計備忘錄。
+* Technical deep-dives regarding runtime architecture optimization, memory alignment strategies, and MLOps design memorandums.
 
 ---
 

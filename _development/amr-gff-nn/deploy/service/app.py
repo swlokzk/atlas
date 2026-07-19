@@ -18,6 +18,7 @@ from fastapi import FastAPI, HTTPException, Request
 
 from deploy.checkpoint import download_checkpoint, inspect_checkpoint
 from deploy.preprocessing import preprocess_iq
+from deploy.runtime import RuntimeSelection, create_session
 from deploy.service.schemas import ClassifyRequest, ClassifyResponse
 
 
@@ -40,6 +41,7 @@ class ServiceRuntime:
         self.artifact_path: Path | None = None
         self.config: dict[str, Any] = {}
         self.manifest: dict[str, Any] = {}
+        self.runtime_selection: RuntimeSelection | None = None
 
     def load(self) -> None:
         artifact_dir = Path(os.getenv("AMR_ARTIFACT_DIR", str(DEFAULT_ARTIFACT_DIR)))
@@ -57,7 +59,7 @@ class ServiceRuntime:
             checkpoint_info = inspect_checkpoint(download_checkpoint())
             if checkpoint_info.sha256 != self.manifest.get("checkpoint_sha256"):
                 raise RuntimeError("Downloaded checkpoint checksum does not match ONNX artifact manifest.")
-        self.session = ort.InferenceSession(str(artifact_path), providers=["CPUExecutionProvider"])
+        self.session, self.runtime_selection = create_session(artifact_path)
         self.artifact_path = artifact_path
 
 
@@ -96,7 +98,11 @@ def metadata() -> dict[str, object]:
         raise HTTPException(status_code=503, detail="ONNX Runtime session is not loaded.")
     return {
         "model_version": runtime.config["model_version"],
-        "runtime": "onnxruntime==1.18.1",
+        "runtime": f"onnxruntime=={ort.__version__}",
+        "runtime_requested": runtime.runtime_selection.requested if runtime.runtime_selection else "unknown",
+        "runtime_selected": runtime.runtime_selection.selected if runtime.runtime_selection else "unknown",
+        "provider": runtime.session.get_providers()[0],
+        "fallback_providers": runtime.session.get_providers()[1:],
         "labels": runtime.config["labels"],
         "preprocessing_version": runtime.manifest["preprocessing_version"],
         "input_shapes": runtime.manifest["tensor_shapes"],

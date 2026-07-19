@@ -311,7 +311,7 @@ FastAPI service
 CPU Docker deployment
 ```
 
-The deployment pipeline does not use GGUF or GGML. ONNX Runtime is the supported deployment runtime.
+The deployment pipeline does not use GGUF or GGML. ONNX Runtime CPU is the currently validated deployment backend; CUDA, TensorRT, and NPU paths require independent validation. Research workflows may use CUDA wherever the installed PyTorch build supports it.
 
 ### Deployment Input Contract
 
@@ -464,6 +464,15 @@ uvicorn deploy.service.app:app \
   --port 8000
 ```
 
+Runtime selection is environment-driven. CPU remains the default reference path:
+
+```bash
+AMR_RUNTIME=cpu python -m deploy.runtime_check
+AMR_RUNTIME=auto uvicorn deploy.service.app:app --host 0.0.0.0 --port 8000
+```
+
+`AMR_RUNTIME=cuda` and `AMR_RUNTIME=tensorrt` require their corresponding ONNX Runtime providers and fail clearly when unavailable. The `/metadata` response records the requested runtime, selected runtime, active provider, and fallback providers.
+
 The service loads a prebuilt `model.int8.onnx` when available and falls back to `model.fp32.onnx`. Model export and quantization are not executed during service startup.
 
 ### Health Check
@@ -574,6 +583,10 @@ Docker build and runtime smoke testing were not performed in the original implem
 | PyTorch/ONNX parity on deterministic fixtures | Complete |
 | Dynamic INT8 graph generation | Complete |
 | Dynamic INT8 runtime loading | Complete |
+| ONNX Runtime CPU deployment backend | Validated reference |
+| CUDA ONNX Runtime parity and benchmark | Planned |
+| Static Batch-1 ONNX for NPU compilers | Planned |
+| TensorRT FP16 engine | Planned |
 | Dynamic INT8 real-data accuracy validation | Pending RadioML dataset |
 | Static INT8 calibration | Pending real calibration data |
 | Per-class INT8 evaluation | Pending RadioML dataset |

@@ -3,7 +3,8 @@
 ## Canonical Model
 
 - **Candidate:** `src.models.model.GatedFusionFormer`
-- **Version:** `gff-v3`
+- **Deployment version:** `gff-v5`
+- **Model name:** `gffnn`
 - **Reason:** It is the only complete Gated Fusion Former implementation in the
   current repository. It defines the encoder, transformer, normalization,
   gating, and output head used by its forward path.
@@ -55,6 +56,18 @@ requires callers to set `PYTHONPATH`.
 The deployment dependency file only references the workspace-approved package
 allowlist and the official PyPI index. The supported runtime is CPython 3.10.x;
 local Python 3.13 is not a deployment validation environment.
+
+## Multi-Backend Roadmap
+
+- ONNX Runtime CPU is the validated portable reference and fallback backend.
+- `AMR_RUNTIME=cpu|cuda|tensorrt|auto` selects the requested provider chain;
+  explicit CUDA or TensorRT requests fail when their primary provider is absent.
+- CUDA ONNX Runtime, FP16, TensorRT engines, and vendor NPU artifacts require
+  separate compatibility, parity, and end-to-end benchmark validation.
+- DSP preprocessing remains CPU-side NumPy/SciPy until profiling demonstrates
+  that it dominates the end-to-end budget.
+- Static Batch-1 ONNX is an upcoming compiler input for a chosen edge/NPU
+  target; ONNX alone does not guarantee full accelerator delegation.
 
 ## FP32 ONNX Evidence
 

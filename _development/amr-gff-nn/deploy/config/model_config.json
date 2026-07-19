@@ -1,6 +1,6 @@
 {
-  "model_name": "gated_fusion_former",
-  "model_version": "gff-v3",
+  "model_name": "gffnn",
+  "model_version": "gff-v5",
   "canonical_class": "src.models.model.GatedFusionFormer",
   "embed_dim": 96,
   "num_classes": 11,

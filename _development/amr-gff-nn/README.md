@@ -193,7 +193,7 @@ python src/run.py compare --weights model.pth --data RML2016.10a_dict.pkl
 
 ---
 
-## 限制與注意事項 | Limitations
+## 限制與額外事項 | Limitations
 
 - Full class-level and SNR-level deployment regression requires the RadioML dataset.
 - Dynamic INT8 generation has been tested structurally but has not received final accuracy approval.

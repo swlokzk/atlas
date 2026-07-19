@@ -1,10 +1,10 @@
-# README.v4
+# README.v5
 
 簡短說明
 ---------
-本檔為 amc-amr-gff-nn 專案的「v4」說明檔，聚焦於最近的結構化與模組化改動。此版本說明如何以「程式庫 + CLI entrypoint」的方式使用本套件（更適合生產化、單元測試與 CI/CD），並補充程式呼叫示例與常用參數。此文件與原 README.md 共存，作為更工程化（modular）使用的操作手冊。
+本檔為 amc-amr-gff-nn 專案的「v5」說明檔，聚焦於最近的結構化與模組化改動。此版本說明如何以「程式庫 + CLI entrypoint」的方式使用本套件（更適合生產化、單元測試與 CI/CD），並補充程式呼叫示例與常用參數。此文件與原 README.md 共存，作為更工程化（modular）使用的操作手冊。
 
-重點變更（v4）
+重點變更（v5）
 ----------------
 - 將原 Notebook 與單一腳本流程拆成模組化套件（src 套件化）：核心邏輯（dataset / pipeline / metrics / models / factory）可被程式匯入或透過 CLI 呼叫。
 - 新增統一入口：`src/run.py`（或 `python -m src.run`）作為 subcommand 入口（evaluate / deep_analysis / ablation / gating / compare）。
@@ -51,7 +51,7 @@ amc-amr-gff-nn/
 │       ├── gff_nn.py
 │       └── cnn2.py / mod_rec_net.py
 ├── README.md
-└── README.v4.md
+└── README.v5.md
 ```
 
 使用方式（CLI）
@@ -120,8 +120,8 @@ preds = predict_batch(model, dataset, device="cuda")
 常見問題（FAQ）
 ----------------
 - 我改了某些檔案路徑，README 需要更新嗎？
-  - 若模組或檔名有改動（例如子指令名稱或檔案位置），請把變動的確切檔案路徑告訴我，我會幫你更新 README.v4.md 中的範例指令與範例程式碼。
-- 想把 README.v4.md 直接加入 repo？
+  - 若模組或檔名有改動（例如子指令名稱或檔案位置），請把變動的確切檔案路徑告訴我，我會幫你更新 README.v5.md 中的範例指令與範例程式碼。
+- 想把 README.v5.md 直接加入 repo？
   - 我可以幫你產生內容與建議的 commit message；若要我直接開 PR 或 push，請明確授權並提供 repository 權限/owner 資訊（或讓我知道要用的分支名）。
 
 維護與開發建議
@@ -132,5 +132,5 @@ preds = predict_batch(model, dataset, device="cuda")
 
 版本紀錄（小節）
 ----------------
-- README.v4.md — 本檔（模組化 / production-friendly）
+- README.v5.md — 本檔（模組化 / production-friendly）
 - 若需更精細的 migration notes（例如���檔名對照表），我可以為你產出一份「遷移對照表」。
